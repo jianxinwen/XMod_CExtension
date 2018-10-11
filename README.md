@@ -172,9 +172,9 @@ Lua扩展API部分定义在头文件[`XModLuaAPIStub.h`](https://github.com/xxzh
     + 2: 试用用户
     + 3: 免费用户
 
-    > uid并非果盘账号，但能唯一对应果盘账号；  
-    > 用户通过激活码激活（包括日卡）套餐后，也认定为付费用户；  
-    > 开发助手下获取到的uid和expiredTime固定为"null"和3.
+	> uid并非果盘账号，但能唯一对应果盘账号；  
+	> 用户通过激活码激活（包括日卡）套餐后，也认定为付费用户；  
+	> 开发助手下获取到的uid和membership固定为"null"和3.
 
 * **void xmod\_screen\_get\_size(xmod\_size\* size)**
 
@@ -302,7 +302,7 @@ int luaopen_unzip(lua_State *L)
 
     + 下载和配置好Android NDK工具；
     + 打开Terminal，用`cd`命令切换到build目录；
-    + 运行命令行`sh build_android.sh unzip`，脚本会执行ndk-build编译modules/unzip工程（默认release模式，可选`-d`参数指定debug模式）；
+    + 运行命令行`sh build_android.sh -m unzip`，脚本会执行ndk-build编译modules/unzip工程（默认release模式，可选`-d`参数指定debug模式）；
     + 编译过程如提示出错，请按错误提示进行修改，编译成功后，文件可以在`output/android/unzip`目录下找到对应Android架构的`so`后缀的动态库文件。
 
 * Windows系统
