@@ -1,3 +1,23 @@
+# 叉叉脚本扩展
+
+## xsp库
+### 库文件生成
+
+xsp库和普通xsp脚本包导出方式一致，只需通过叉叉集成开发环境的功能菜单中的`发布`-`导出脚本`即可将代码或者图片资源打包成xsp库。
+
+### 库文件导入和使用
+
+导入xsp库时，只需要在叉叉集成开发环境中对应工程项目下的`库文件`目录下导入xsp库即可。也可以直接将xsp库文件拷贝到工程目录下的`lib`目录中。
+
+要加载xsp库中某个代码模块，同样也是通过require函数调用。如现有fooLib.xsp库，按上述布置在对应目录下之后，只需要在代码中调用`require 'fooLib.foo'`即可调用fooLib.xsp库中的foo模块。
+
+使用xsp库中的资源文件时，需要以URI的形式来访问，资源路径为`库名+资源在库内路径`，同时需要添加xsp的scheme前缀，例如：
+
+
+### 多重嵌套
+
+xsp库是支持多重嵌套的，如fooLib库中还使用到barLib库，那么只需保证barLib库也按照上述要求导入到fooLib中即可，外部工程可以通过调用`require 'fooLib.barLib.bar'`来加载barLib库中的bar模块。
+
 ## C/C++扩展
 
 ### 前言
@@ -52,55 +72,55 @@ Lua虚拟机API定义在头文件[`LuaAPIStub53.h`](https://github.com/xxzhushou
 
 Lua扩展API部分定义在头文件[`XModLuaAPIStub.h`](https://github.com/xxzhushou/CExtension/blob/master/include/XModLuaAPIStub.h)中，主要是针对XMod引擎内部的Lua扩展操作，目前有以下API：
 
-* **void lua\_push\_xmod\_point(lua\_State* L, const xmod\_point& val)**
+* **void lua\_push\_xmod\_point(lua\_State\* L, const xmod\_point& val)**
 
     将`xmod_point`的实例val压到当前Lua堆栈栈顶（对应Lua中`Point` usertype类型）。
 
-* **void lua\_push\_xmod\_size(lua\_State* L, const xmod\_size& val)**
+* **void lua\_push\_xmod\_size(lua\_State\* L, const xmod\_size& val)**
 
     将`xmod_size`的实例val压到当前Lua堆栈栈顶（对应Lua中`Size` usertype类型）。
 
-* **void lua\_push\_xmod\_rect(lua\_State* L, const xmod\_rect& val)**
+* **void lua\_push\_xmod\_rect(lua\_State\* L, const xmod\_rect& val)**
 
     将`xmod_rect`的实例val压到当前Lua堆栈栈顶（对应Lua中`Rect` usertype类型）。
 
-* **void lua\_push\_xmod\_color3b(lua\_State* L, const xmod\_color3b& val)**
+* **void lua\_push\_xmod\_color3b(lua\_State\* L, const xmod\_color3b& val)**
 
     将`xmod_color3b`的实例val压到当前Lua堆栈栈顶（对应Lua中`Color3b` usertype类型）。
 
-* **void lua\_push\_xmod\_color3f(lua\_State* L, const xmod\_color3f& val)**
+* **void lua\_push\_xmod\_color3f(lua\_State\* L, const xmod\_color3f& val)**
 
     将`xmod_color3f`的实例val压到当前Lua堆栈栈顶（对应Lua中`Color3f` usertype类型）。
 
-* **void lua\_push\_xmod\_image(lua\_State* L, const xmod\_image& val)**
+* **void lua\_push\_xmod\_image(lua\_State\* L, const xmod\_image& val)**
 
     将`xmod_image`的实例val压到当前Lua堆栈栈顶（对应Lua中`Image` usertype类型）。
 
-* **xmod\_point lua\_to\_xmod\_point(lua\_State* L, int index)**
+* **xmod\_point lua\_to\_xmod\_point(lua\_State\* L, int index)**
 
     将Lua栈对应index处位置的Lua对象（`Point` usertype类型）转换成`xmod_point`类型并返回。
 
-* **xmod\_size lua\_to\_xmod\_size(lua\_State* L, int index)**
+* **xmod\_size lua\_to\_xmod\_size(lua\_State\* L, int index)**
 
     将Lua栈对应index处位置的Lua对象（`Size` usertype类型）转换成`xmod_size`类型并返回。
 
-* **xmod\_rect lua\_to\_xmod\_rect(lua\_State* L, int index)**
+* **xmod\_rect lua\_to\_xmod\_rect(lua\_State\* L, int index)**
 
     将Lua栈对应index处位置的Lua对象（`Rect` usertype类型）转换成`xmod_rect`类型并返回。
 
-* **xmod\_color3b lua\_to\_xmod\_color3b(lua\_State* L, int index)**
+* **xmod\_color3b lua\_to\_xmod\_color3b(lua\_State\* L, int index)**
 
     将Lua栈对应index处位置的Lua对象（`Color3b` usertype类型）转换成`xmod_color3b`类型并返回。
 
-* **xmod\_color3f lua\_to\_xmod\_color3f(lua\_State* L, int index)**
+* **xmod\_color3f lua\_to\_xmod\_color3f(lua\_State\* L, int index)**
 
     将Lua栈对应index处位置的Lua对象（`Color3f` usertype类型）转换成`xmod_color3f`类型并返回。
 
-* **xmod\_image* lua\_to\_xmod\_image(lua\_State* L, int index)**
+* **xmod\_image* lua\_to\_xmod\_image(lua\_State\* L, int index)**
 
     将Lua栈对应index处位置的Lua对象（`Image` usertype类型）转换成`xmod_image*`类型并返回。
 
-* **void dispatch\_in\_lua\_thread(const std::function<void(lua\_State*)>& callback)**
+* **void dispatch\_in\_lua\_thread(const std::function<void(lua\_State\*)>& callback)**
 
     将C函数callback放到Lua主线程中执行，此函数可以在多线程环境下调用。
 
