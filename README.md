@@ -1,23 +1,3 @@
-# 叉叉脚本扩展
-
-## xsp库
-### 库文件生成
-
-xsp库和普通xsp脚本包导出方式一致，只需通过叉叉集成开发环境的功能菜单中的`发布`-`导出脚本`即可将代码或者图片资源打包成xsp库。
-
-### 库文件导入和使用
-
-导入xsp库时，只需要在叉叉集成开发环境中对应工程项目下的`库文件`目录下导入xsp库即可。也可以直接将xsp库文件拷贝到工程目录下的`lib`目录中。
-
-要加载xsp库中某个代码模块，同样也是通过require函数调用。如现有fooLib.xsp库，按上述布置在对应目录下之后，只需要在代码中调用`require 'fooLib.foo'`即可调用fooLib.xsp库中的foo模块。
-
-使用xsp库中的资源文件时，需要以URI的形式来访问，资源路径为`库名+资源在库内路径`，同时需要添加xsp的scheme前缀，例如：
-
-
-### 多重嵌套
-
-xsp库是支持多重嵌套的，如fooLib库中还使用到barLib库，那么只需保证barLib库也按照上述要求导入到fooLib中即可，外部工程可以通过调用`require 'fooLib.barLib.bar'`来加载barLib库中的bar模块。
-
 ## C/C++扩展
 
 ### 前言
@@ -53,7 +33,7 @@ XMod C/C++扩展工程可以在这里下载最新的配置文件和代码（附�
 
 #### Lua虚拟机API
 
-Lua虚拟机API定义在头文件[`LuaAPIStub53.h`](https://github.com/xxzhushou/CExtension/blob/master/include/LuaAPIStub53.h)中，叉叉引擎从2.0版本开始，使用Lua v5.3运行环境，扩展支持***除以下列表外***的所有公开Lua C API接口：
+Lua虚拟机API定义在头文件[`LuaAPIStub53.h`](https://github.com/xxzhushou/CExtension/blob/master/include/LuaAPIStub53.h)中，叉叉引擎从2.0版本开始，使用Lua v5.3运行环境，扩展支持 ***除以下列表外*** 的所有公开Lua C API接口：
 
 * **lua_dump**
 * **lua_load**
@@ -116,7 +96,7 @@ Lua扩展API部分定义在头文件[`XModLuaAPIStub.h`](https://github.com/xxzh
 
     将Lua栈对应index处位置的Lua对象（`Color3f` usertype类型）转换成`xmod_color3f`类型并返回。
 
-* **xmod\_image* lua\_to\_xmod\_image(lua\_State\* L, int index)**
+* **xmod\_image\* lua\_to\_xmod\_image(lua\_State\* L, int index)**
 
     将Lua栈对应index处位置的Lua对象（`Image` usertype类型）转换成`xmod_image*`类型并返回。
 
@@ -132,7 +112,7 @@ Lua扩展API部分定义在头文件[`XModLuaAPIStub.h`](https://github.com/xxzh
 
     获取当前运行平台名，并写入到platform指针对应地址中，结果可能是"Android"或者"iOS"之一。
 
-* **void xmod\_get\_version\_code(int* code)**
+* **void xmod\_get\_version\_code(int\* code)**
 
     获取XMod引擎版本号，并写入到code指针对应地址中。
 
@@ -140,11 +120,11 @@ Lua扩展API部分定义在头文件[`XModLuaAPIStub.h`](https://github.com/xxzh
 
     获取XMod引擎版本名，并写入到name指针对应地址中。
 
-* **void xmod\_get\_product\_code(XModProductCode* code)**
+* **void xmod\_get\_product\_code(XModProductCode\* code)**
 
     获取当前运行产品代号，并写入到code指针对应地址中。
 
-* **void xmod\_get\_process\_mode(XModProcessMode* mode)**
+* **void xmod\_get\_process\_mode(XModProcessMode\* mode)**
 
     获取当前运行模式，并写入到mode指针对应地址中，结果可能是：
 
@@ -169,19 +149,19 @@ Lua扩展API部分定义在头文件[`XModLuaAPIStub.h`](https://github.com/xxzh
 
     获取当前运行脚本的私有目录路径，并写入到path指针对应地址中。
 
-* **void xmod\_get\_resolved\_path(const char* path, char\*\* outpath)**
+* **void xmod\_get\_resolved\_path(const char\* path, char\*\* outpath)**
 
     将伪目录path转换成完整路径，并写入到outpath指针对应地址中。
 
     > 例如传入参数path = "[public]test.png"，得到的outpath为公共目录路径下的test.png完整路径。
 
-* **bool xmod\_script\_get\_id(int* id)**
+* **bool xmod\_script\_get\_id(int\* id)**
 
     获取当前脚本运行ID，并写入到id指针对应的地址中；获取成功放回true，否则返回false。
 
     > 开发助手下运行获取得脚本ID固定为-1.
 
-* **bool xmod\_script\_get\_user\_info(char\*\* uid, int* membership, int* expiredTime)**
+* **bool xmod\_script\_get\_user\_info(char\*\* uid, int\* membership, int\* expiredTime)**
 
     获取当前用户的ID、会员标识和剩余时间，分别写入到uid、membership和expiredTime指针对应地址中；获取成功返回true，否则返回false。
 
@@ -196,13 +176,13 @@ Lua扩展API部分定义在头文件[`XModLuaAPIStub.h`](https://github.com/xxzh
     > 用户通过激活码激活（包括日卡）套餐后，也认定为付费用户；  
     > 开发助手下获取到的uid和expiredTime固定为"null"和3.
 
-* **void xmod\_screen\_get\_size(xmod\_size* size)**
+* **void xmod\_screen\_get\_size(xmod\_size\* size)**
 
     获取屏幕分辨率，并写入到size指针对应的对象中。
 
     > 注意返回结果和脚本的`screen.init`调用有关。
 
-* **void xmod\_screen\_mock\_transform\_rect(XModMockMode mode, const xmod\_rect& in, xmod\_rect* out)**
+* **void xmod\_screen\_mock\_transform\_rect(XModMockMode mode, const xmod\_rect& in, xmod\_rect\* out)**
 
     指定转换模式mode，对in矩形进行转换，转换结果写入到out指针对应的对象中。
 
@@ -210,75 +190,75 @@ Lua扩展API部分定义在头文件[`XModLuaAPIStub.h`](https://github.com/xxzh
 
     > 注意：该函数涉及Lua调用，只能在Lua线程（即默认触发线程）中调用，多线程环境下调用会导致不可控的报错甚至闪退。
 
-* **void xmod\_screen\_mock\_transform\_point(XModMockMode mode, const xmod\_point& in, xmod\_point* out)**
+* **void xmod\_screen\_mock\_transform\_point(XModMockMode mode, const xmod\_point& in, xmod\_point\* out)**
 
     与`xmod_screen_mock_transform_rect`函数功能类似，不同的是只针对xmod_point类型进行转换。
 
     > 注意：该函数涉及Lua调用，只能在Lua线程（即默认触发线程）中调用，多线程环境下调用会导致不可控的报错甚至闪退。
 
-* **bool xmod\_xsp\_get\_res(const char* subpath, unsigned char\*\* buff, size\_t* size)**
+* **bool xmod\_xsp\_get\_res(const char\* subpath, unsigned char\*\* buff, size\_t\* size)**
 
     获取XSP文件中res/目录下的subpath文件，将文件数据和大小分别写入到buff指针和size指针对应地址；获取成功返回true，否则返回false（例如文件不存在）。
 
-* **bool xmod\_xsp\_extract\_res(const char* subpath, const char* destpath)**
+* **bool xmod\_xsp\_extract\_res(const char\* subpath, const char\* destpath)**
 
     将XSP文件中res/目录下的subpath文件解压到destpath路径，解压成功返回true，否则返回false（例如文件不存在）。
 
-* **xmod\_image* xmod\_image\_from\_screen()**
+* **xmod\_image\* xmod\_image\_from\_screen()**
 
     截取当前屏幕，并返回xmod_image\*类型对象。
 
     > 注意创建返回的xmod_image\*对象需要通过`xmod_image_release`进行释放。
 
-* **xmod\_image* xmod\_image\_from\_screen\_clip(const xmod\_rect& rect)**
+* **xmod\_image\* xmod\_image\_from\_screen\_clip(const xmod\_rect& rect)**
 
     指定rect范围截取屏幕数据，并返回xmod_image\*类型对象。
 
     > 注意创建返回的xmod_image\*对象需要通过`xmod_image_release`进行释放。
 
-* **xmod\_image* xmod\_image\_from\_file(const char* path)**
+* **xmod\_image\* xmod\_image\_from\_file(const char\* path)**
 
     指定path路径，加载并返回xmod_image\*类型对象。
 
     > 注意创建返回的xmod_image\*对象需要通过`xmod_image_release`进行释放。
 
-* **xmod\_image* xmod\_image\_from\_stream(const unsigned char* buff, ssize\_t len)**
+* **xmod\_image\* xmod\_image\_from\_stream(const unsigned char\* buff, ssize\_t len)**
 
     指定数据源buff和大小len，构造并返回xmod_image\*类型对象。
 
     > 注意创建返回的xmod_image\*对象需要通过`xmod_image_release`进行释放。
 
-* **xmod\_image* xmod\_image\_from\_format(XModPixelFormat format, const xmod\_size& size, const unsigned char* buff, ssize\_t len)**
+* **xmod\_image\* xmod\_image\_from\_format(XModPixelFormat format, const xmod\_size& size, const unsigned char\* buff, ssize\_t len)**
 
     指定像素格式format、图像尺寸size、数据源buff和大小len，构造并返回xmod_image\*类型对象。
 
     > 注意创建返回的xmod_image\*对象需要通过`xmod_image_release`进行释放。
 
-* **void xmod\_image\_release(xmod\_image* image)**
+* **void xmod\_image\_release(xmod\_image\* image)**
 
     释放image对象。
 
-* **bool xmod\_image\_get\_size(const xmod\_image* image, xmod\_size* size)**
+* **bool xmod\_image\_get\_size(const xmod\_image\* image, xmod\_size* size)**
 
     获取image对象的图像尺寸，并写入到size指针对应的对象中；获取成功返回true，否则返回false。
 
-* **void xmod\_image\_set\_rotation(xmod\_image* image, XModRotation rotation)**
+* **void xmod\_image\_set\_rotation(xmod\_image\* image, XModRotation rotation)**
 
     对image对象进行旋转操作。
 
-* **void xmod\_image\_clip\_with\_rect(xmod\_image* image, const xmod\_rect& rect)**
+* **void xmod\_image\_clip\_with\_rect(xmod\_image\* image, const xmod\_rect& rect)**
 
     对image对象进行截取操作，截取范围为rect。
 
-* **bool xmod\_image\_get\_pixel(const xmod\_image* image, const xmod\_point& point, uint32\_t* pixel)**
+* **bool xmod\_image\_get\_pixel(const xmod\_image\* image, const xmod\_point& point, uint32\_t\* pixel)**
 
     获取image图像位于point处的RGB888格式像素数据，并写入到pixel指针对应的地址中；获取成功返回true，否则返回false（例如point范围越界）。
 
-* **bool xmod\_image\_get\_rgb(const xmod\_image* image, const xmod\_point& point, xmod\_color3b* c3b)**
+* **bool xmod\_image\_get\_rgb(const xmod\_image\* image, const xmod\_point& point, xmod\_color3b\* c3b)**
 
     获取image图像位于point处的RGB888格式像素数据，并写入到c3b指针对应的对象中；获取成功返回true，否则返回false（例如point范围越界）。
 
-* **bool xmod\_image\_save\_to\_file(const xmod\_image* image, const char* path, int quality)**
+* **bool xmod\_image\_save\_to\_file(const xmod\_image\* image, const char\* path, int quality)**
 
     将image图像保存到path指定的路径中，质量quality可选1-100范围；保存成功返回true，否则返回false（例如path路径没有操作权限）。
 
@@ -288,7 +268,7 @@ Lua扩展API部分定义在头文件[`XModLuaAPIStub.h`](https://github.com/xxzh
 #### 头文件引入
 有Lua扩展模块经验的开发者可能会留意到，XMod引擎并没有提供Lua原生的lua.h、lauxlib.h等头文件供开发者引入。
 
-在XMod引擎扩展中，提供了ExtensionSupport.h这个头文件作为整个XMod引擎扩展库的总头文件，实际上所有lua.h、lauxlib.h等头文件已经被合并到了LuaAPIStub53.h这个头文件中，你只能在需要用到Lua模块的地方单独include这个头文件来使用Lua的C API，而不能再用类似`#include <lua.h>`这样的写法。参见示例module/lunzip模块中的[lua_unzip.cpp](https://github.com/xxzhushou/CExtension/blob/master/modules/lunzip/lua_unzip.cpp)中的头文件依赖。
+在XMod引擎扩展中，提供了ExtensionSupport.h这个头文件作为整个XMod引擎扩展库的总头文件，实际上所有lua.h、lauxlib.h等头文件已经被合并到了LuaAPIStub53.h这个头文件中，你只能在需要用到Lua模块的地方单独include这个头文件来使用Lua的C API，而不能再用类似`#include <lua.h>`这样的写法。参见示例module/unzip模块中的[lua_unzip.cpp](https://github.com/xxzhushou/CExtension/blob/master/modules/unzip/classes/lua_unzip.cpp)中的头文件依赖。
 
 需要注意的是，由于ExtensionSupport.h中默认集成的头文件中依赖了C++的namespace等关键词，所以任何包含了ExtensionSupport.h的源代码，都需要以cpp/cc/cxx等后缀格式结尾，不能使用c后缀格式，其他源代码文件不受影响。
 
@@ -299,7 +279,7 @@ Lua扩展API部分定义在头文件[`XModLuaAPIStub.h`](https://github.com/xxzh
 * 入口函数名必须符合`luaopen_<module_name>`的格式；
 * 入口函数名编译后的符号必须以C命名风格，而不是C++命名风格（C++支持重载）。
 
-看似规则复杂，实际上要同时保证上面这三点要求，只需要在入口函数上面加上`extern "C" __attribute__((visibility("default")))`修饰即可，例如[lua_unzip.cpp](https://github.com/xxzhushou/CExtension/blob/master/modules/lunzip/lua_unzip.cpp)中`luaopen_unzip`函数的定义是：
+看似规则复杂，实际上要同时保证上面这三点要求，只需要在入口函数上面加上`extern "C" __attribute__((visibility("default")))`修饰即可，例如[lua_unzip.cpp](https://github.com/xxzhushou/CExtension/blob/master/modules/unzip/classes/lua_unzip.cpp)中`luaopen_unzip`函数的定义是：
 
 ```cpp
 extern "C" __attribute__((visibility("default")))
@@ -314,7 +294,7 @@ int luaopen_unzip(lua_State *L)
 
 ### 编译和打包
 
-以[@xxzhushou/CExtension](https://github.com/xxzhushou/CExtension)项目中的modules/lunzip工程为例。
+以[@xxzhushou/CExtension](https://github.com/xxzhushou/CExtension)项目中的modules/unzip工程为例。
 
 #### Android动态库编译
 
@@ -322,8 +302,8 @@ int luaopen_unzip(lua_State *L)
 
     + 下载和配置好Android NDK工具；
     + 打开Terminal，用`cd`命令切换到build目录；
-    + 运行命令行`sh build_android.sh lunzip`，脚本会执行ndk-build编译modules/lunzip工程（默认release模式，可选`-d`参数指定debug模式）；
-    + 编译过程如提示出错，请按错误提示进行修改，编译成功后，文件可以在`output/android/lunzip`目录下找到对应Android架构的`so`后缀的动态库文件。
+    + 运行命令行`sh build_android.sh unzip`，脚本会执行ndk-build编译modules/unzip工程（默认release模式，可选`-d`参数指定debug模式）；
+    + 编译过程如提示出错，请按错误提示进行修改，编译成功后，文件可以在`output/android/unzip`目录下找到对应Android架构的`so`后缀的动态库文件。
 
 * Windows系统
 
