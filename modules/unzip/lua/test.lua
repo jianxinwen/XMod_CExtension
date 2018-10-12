@@ -1,6 +1,6 @@
 local unzip = require("unzip")
 
-local z, err = unzip.open(path)
+local z, err = unzip.open('/sdcard/test.zip')
 if z then
     for fn in z:files() do
         printf('file: %s', fn.filename)

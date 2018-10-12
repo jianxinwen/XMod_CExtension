@@ -1,3 +1,46 @@
+# XMod引擎脚本扩展
+
+## xsp库
+### 库文件生成
+
+xsp库和普通xsp脚本包导出方式一致，只需通过叉叉集成开发环境的功能菜单中的`发布`-`导出脚本`即可将代码或者图片资源打包成xsp库。
+
+### 库文件导入和使用
+
+导入xsp库时，只需要在叉叉集成开发环境中对应工程项目下的`库文件`目录下导入xsp库即可。也可以直接将xsp库文件拷贝到工程目录下的`lib`目录中。
+
+要加载xsp库中某个代码模块，同样也是通过require函数调用。如现有以下fooLib.xsp库，包含一个名为fooModule的模块：
+
+![fooModule](https://i.loli.net/2018/10/12/5bc069577d98b.png)
+
+那么，按上述生成fooLib.xsp库文件后，部署在目标工程的`库文件`目录下之后，只需要在代码中调用`require 'fooLib.fooModule'`即可调用fooLib.xsp库中的fooModule模块：
+
+![using fooModule](https://i.loli.net/2018/10/12/5bc06957a749f.png)
+
+使用xsp库中的资源文件时，需要以URI的形式来访问，资源路径为`库名+资源在库内路径`，同时需要添加xsp的scheme前缀，例如：
+
+```lua
+-- test_lib/src/main.lua
+
+local rootLayout = {
+	view = 'scroller',
+	subviews = {
+		{
+			view = 'image',
+			style = {
+				width = 80,
+				height = 80
+			},
+			src = 'xsp://fooLib/test.png'
+		}
+	}
+}
+```
+
+### 多重嵌套
+
+xsp库是支持多重嵌套的，如fooLib库中还使用到barLib库，那么只需保证barLib库也按照上述要求导入到fooLib中即可，外部工程可以通过调用`require 'fooLib.barLib.bar'`来加载barLib库中的bar模块。
+
 ## C/C++扩展
 
 ### 前言
@@ -172,9 +215,9 @@ Lua扩展API部分定义在头文件[`XModLuaAPIStub.h`](https://github.com/xxzh
     + 2: 试用用户
     + 3: 免费用户
 
-	> uid并非果盘账号，但能唯一对应果盘账号；  
-	> 用户通过激活码激活（包括日卡）套餐后，也认定为付费用户；  
-	> 开发助手下获取到的uid和membership固定为"null"和3.
+    > uid并非果盘账号，但能唯一对应果盘账号；  
+    > 用户通过激活码激活（包括日卡）套餐后，也认定为付费用户；  
+    > 开发助手下获取到的uid和expiredTime固定为"null"和3.
 
 * **void xmod\_screen\_get\_size(xmod\_size\* size)**
 
@@ -302,7 +345,7 @@ int luaopen_unzip(lua_State *L)
 
     + 下载和配置好Android NDK工具；
     + 打开Terminal，用`cd`命令切换到build目录；
-    + 运行命令行`sh build_android.sh -m unzip`，脚本会执行ndk-build编译modules/unzip工程（默认release模式，可选`-d`参数指定debug模式）；
+    + 运行命令行`sh build_android.sh unzip`，脚本会执行ndk-build编译modules/unzip工程（默认release模式，可选`-d`参数指定debug模式）；
     + 编译过程如提示出错，请按错误提示进行修改，编译成功后，文件可以在`output/android/unzip`目录下找到对应Android架构的`so`后缀的动态库文件。
 
 * Windows系统
@@ -360,3 +403,9 @@ XMod引擎目前支持且仅支持以下两种Android架构：
 #### 部署iOS动态库文件
 
 待补充。
+
+#### 修改工程配置
+
+双击左边导航栏的工程名称，打开工程属性设置，在下方`C扩展配置`设置面板中，点击`添加`然后编辑名称和入口函数（注意名称只需要填写模块名，不是完整的动态库文件名），最后确定保存后即可在代码中使用。
+
+![editing project](https://i.loli.net/2018/10/12/5bc06957b1876.png)
