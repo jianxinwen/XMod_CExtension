@@ -37,9 +37,9 @@
 
 /* data types */
 typedef void                        lua_State;
-typedef float                      lua_Number;
-typedef int32_t                   lua_Integer;
-typedef unsigned long long          lua_Unsigned;
+typedef float                       lua_Number;
+typedef int32_t                     lua_Integer;
+typedef uint32_t                    lua_Unsigned;
 typedef ptrdiff_t                   lua_KContext;
 
 /* basic types */
@@ -148,8 +148,8 @@ API_DEFINE(int,                     lua_toboolean,              lua_State* L, in
 API_DEFINE(const char*,             lua_tolstring,              lua_State* L, int idx, size_t* len);
 API_DEFINE(size_t,                  lua_rawlen,                 lua_State* L, int idx);
 API_DEFINE(lua_CFunction,           lua_tocfunction,            lua_State* L, int idx);
-API_DEFINE(void,                    lua_touserdata,             lua_State* L, int idx);
-API_DEFINE(lua_State,               lua_tothread,               lua_State* L, int idx);
+API_DEFINE(void*,                   lua_touserdata,             lua_State* L, int idx);
+API_DEFINE(lua_State*,              lua_tothread,               lua_State* L, int idx);
 API_DEFINE(const void*,             lua_topointer,              lua_State* L, int idx);
 API_DEFINE(void,                    lua_arith,                  lua_State* L, int op);
 API_DEFINE(int,                     lua_rawequal,               lua_State* L, int idx1, int idx2);
