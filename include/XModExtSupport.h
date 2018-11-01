@@ -9,7 +9,7 @@
 #include "XModMacros.h"
 #include "XModStruct.h"
 #include "XModAPIStub.h"
-#include "XModLuaAPIStub53.h"
+#include "XModLua53APIStub.h"
 #include "XModLuaExtAPIStub.h"
 
 #endif // __XMOD_EXT_SUPPORT_H__
