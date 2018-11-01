@@ -9,7 +9,7 @@
 #include <functional>
 
 #include "XModStruct.h"
-#include "XModLuaAPIStub53.h"
+#include "XModLua53APIStub.h"
 
 typedef std::function<void(lua_State*)> lua_frame;
 
