@@ -1,16 +1,17 @@
 /****************************************
  * @Author jinqian @ XXTeam
+ * @Author Irvin Pang @ XXTeam
  * @Repo   https://github.com/xxzhushou
  ****************************************/
 
-#ifndef __LUA_API_STUB_53_H__
-#define __LUA_API_STUB_53_H__
+#ifndef __XMOD_LUA_API_STUB_53_H__
+#define __XMOD_LUA_API_STUB_53_H__
 
 #include <stdio.h>
 #include <stdarg.h>
 #include <stddef.h>
 
-#include "Macros.h"
+#include "XModMacros.h"
 
 #define LUA_VERSION_NUM             503
 
@@ -299,4 +300,4 @@ XMOD_C_API_END
 #define lua_equal(L, idx1, idx2)    lua_compare(L, (idx1), (idx2), LUA_OPEQ)
 #define lua_lessthan(L, idx1, idx2) lua_compare(L, (idx1), (idx2), LUA_OPLT)
 
-#endif // __LUA_API_STUB_53_H__
+#endif // __XMOD_LUA_API_STUB_53_H__

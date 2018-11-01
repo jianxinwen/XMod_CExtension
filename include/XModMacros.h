@@ -3,6 +3,9 @@
  * @Repo   https://github.com/xxzhushou
  ****************************************/
 
+#ifndef __XMOD_MACROS_H__
+#define __XMOD_MACROS_H__
+
 #ifdef __cplusplus
 #define XMOD_C_API_BEGIN             extern "C" {
 #define XMOD_C_API_END               }
@@ -35,3 +38,5 @@
 #define XMOD_CONCAT(A, B)            A##B
 #define XMOD_CALL_FUNC_AX(F, N)      XMOD_CONCAT(XMOD_CALL_FUNC_A, N)(F)
 #define XMOD_CALL_FUNC(func, ...)    XMOD_CALL_FUNC_AX(func, XMOD_GET_ARG_CNT(__VA_ARGS__))
+
+#endif // __XMOD_MACROS_H__

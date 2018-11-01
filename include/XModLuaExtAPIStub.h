@@ -3,13 +3,13 @@
  * @Repo   https://github.com/xxzhushou
  ****************************************/
 
-#ifndef __XMOD_LUA_API_STUB_H__
-#define __XMOD_LUA_API_STUB_H__
+#ifndef __XMOD_LUA_EXT_API_STUB_H__
+#define __XMOD_LUA_EXT_API_STUB_H__
 
 #include <functional>
 
-#include "LuaAPIStub53.h"
 #include "XModStruct.h"
+#include "XModLuaAPIStub53.h"
 
 typedef std::function<void(lua_State*)> lua_frame;
 
@@ -33,4 +33,4 @@ XMOD_API xmod_image* lua_to_xmod_image(lua_State* L, int index);
 
 XMOD_API void dispatch_in_lua_thread(const lua_frame& callback);
 
-#endif // __XMOD_LUA_API_STUB_H__
+#endif // __XMOD_LUA_EXT_API_STUB_H__

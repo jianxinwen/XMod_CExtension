@@ -8,7 +8,7 @@
 
 #include <string>
 
-#include "Macros.h"
+#include "XModMacros.h"
 #include "XModStruct.h"
 
 #define XMOD_PLATFORM_IOS       "iOS"
