@@ -4,8 +4,8 @@
  * @Repo   https://github.com/xxzhushou
  ****************************************/
 
-#ifndef __XMOD_LUA_API_STUB_53_H__
-#define __XMOD_LUA_API_STUB_53_H__
+#ifndef __XMOD_LUA_53_API_STUB_H__
+#define __XMOD_LUA_53_API_STUB_H__
 
 #include <stdio.h>
 #include <stdarg.h>
@@ -38,9 +38,9 @@
 
 /* data types */
 typedef void                        lua_State;
-typedef float                       lua_Number;
-typedef int32_t                     lua_Integer;
-typedef uint32_t                    lua_Unsigned;
+typedef double                      lua_Number;
+typedef int64_t                     lua_Integer;
+typedef uint64_t                    lua_Unsigned;
 typedef ptrdiff_t                   lua_KContext;
 
 /* basic types */
@@ -300,4 +300,4 @@ XMOD_C_API_END
 #define lua_equal(L, idx1, idx2)    lua_compare(L, (idx1), (idx2), LUA_OPEQ)
 #define lua_lessthan(L, idx1, idx2) lua_compare(L, (idx1), (idx2), LUA_OPLT)
 
-#endif // __XMOD_LUA_API_STUB_53_H__
+#endif // __XMOD_LUA_53_API_STUB_H__
