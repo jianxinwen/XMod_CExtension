@@ -33,8 +33,8 @@ enum XModProductCode
 
 enum XModProcessMode
 {
-    kProcessStandalone = 1,
-    kProcessEmbedded
+    kProcessEmbedded = 1,       // 集成运行模式
+    kProcessStandalone = 3      // 独立运行模式
 };
 
 enum XModRotation
