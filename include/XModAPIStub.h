@@ -57,8 +57,9 @@ enum XModPixelFormat
 
 enum XModMockMode
 {
-    kMockModeInput = 1,
-    kMockModeOutput
+    kMockModeInputFixed = 0x1000,
+    kMockModeInputRelative = 0x3000,
+    kMockModeOutput = 0x10000
 };
 
 /***************************
@@ -73,6 +74,7 @@ XMOD_API void xmod_get_product_name(char** name);
 XMOD_API void xmod_get_public_path(char** path);
 XMOD_API void xmod_get_private_path(char** path);
 XMOD_API void xmod_get_resolved_path(const char* path, char** outpath);
+XMOD_API void xmod_get_host_root_path(char** path);
 
 /***************************
  * scrip
@@ -103,10 +105,11 @@ XMOD_API xmod_image* xmod_image_from_stream(const unsigned char* buff, ssize_t l
 XMOD_API xmod_image* xmod_image_from_format(XModPixelFormat format, const xmod_size& size, const unsigned char* buff, ssize_t len);
 XMOD_API void xmod_image_release(xmod_image* image);
 XMOD_API bool xmod_image_get_size(const xmod_image* image, xmod_size* size);
+XMOD_API void xmod_image_get_format(const xmod_image* image, XModPixelFormat* format);
+XMOD_API bool xmod_image_get_rgb(const xmod_image* image, const xmod_point& point, xmod_color3b* c3b);
+XMOD_API bool xmod_image_get_pixel(const xmod_image* image, const xmod_point& point, uint32_t* pixel);
 XMOD_API void xmod_image_set_rotation(xmod_image* image, XModRotation rotation);
 XMOD_API void xmod_image_clip_with_rect(xmod_image* image, const xmod_rect& rect);
-XMOD_API bool xmod_image_get_pixel(const xmod_image* image, const xmod_point& point, uint32_t* pixel);
-XMOD_API bool xmod_image_get_rgb(const xmod_image* image, const xmod_point& point, xmod_color3b* c3b);
 XMOD_API bool xmod_image_save_to_file(const xmod_image* image, const char* path, int quality);
 
 XMOD_C_API_END

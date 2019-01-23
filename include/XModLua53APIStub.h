@@ -10,6 +10,7 @@
 #include <stdio.h>
 #include <stdarg.h>
 #include <stddef.h>
+#include <stdint.h>
 
 #include "XModMacros.h"
 
@@ -26,6 +27,8 @@
 #define LUAI_MAXSTACK               1000000
 #define LUA_REGISTRYINDEX           (-LUAI_MAXSTACK - 1000)
 
+
+#define LUALIB_API                  extern "C" __attribute__((visibility("default")))
 
 /* thread status */
 #define LUA_OK                      0
@@ -69,25 +72,6 @@ typedef ptrdiff_t                   lua_KContext;
 
 #define LUA_NOREF                   (-2)
 #define LUA_REFNIL                  (-1)
-
-#define LUA_OPADD                   0   /* ORDER TM, ORDER OP */
-#define LUA_OPSUB                   1
-#define LUA_OPMUL                   2
-#define LUA_OPMOD                   3
-#define LUA_OPPOW                   4
-#define LUA_OPDIV                   5
-#define LUA_OPIDIV                  6
-#define LUA_OPBAND                  7
-#define LUA_OPBOR                   8
-#define LUA_OPBXOR                  9
-#define LUA_OPSHL                   10
-#define LUA_OPSHR                   11
-#define LUA_OPUNM                   12
-#define LUA_OPBNOT                  13
-
-#define LUA_OPEQ                    0
-#define LUA_OPLT                    1
-#define LUA_OPLE                    2
 
 /*
 ** Type for C functions registered with Lua

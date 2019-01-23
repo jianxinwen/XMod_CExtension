@@ -10,6 +10,12 @@ XMOD_ROOT="$DIR/.."
 [ $ANDROID_NDK_ROOT ] || echo "define 'ANDROID_NDK_ROOT' for your own Android NDK location."
 [ $ANDROID_NDK_ROOT ] || exit 1
 
+NDK_BUILD_PATH="$ANDROID_NDK_ROOT"/ndk-build
+# Windows下使用ndk-build.cmd
+if [ -f ${NDK_BUILD_PATH}.cmd ]; then
+	NDK_BUILD_PATH=${NDK_BUILD_PATH}.cmd
+fi
+
 BUILD_FLAG_DEBUG=0
 BUILD_FLAG_REBUILD=""
 
@@ -34,7 +40,7 @@ fi
 # 使用NDK编译native代码
 TMP_OUTPUT="$XMOD_ROOT"/modules/$BUILD_MODULE/proj.android/ndkBuild
 DEST_OUTPUT="$XMOD_ROOT"/output/android/$BUILD_MODULE
-"$ANDROID_NDK_ROOT"/ndk-build \
+"$NDK_BUILD_PATH" \
 	-j8 \
 	$BUILD_FLAG_REBUILD \
 	NDK_DEBUG=$BUILD_FLAG_DEBUG \
