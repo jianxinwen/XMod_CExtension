@@ -22,6 +22,14 @@
 
 XMOD_C_API_BEGIN
 
+enum XModLogPriority
+{
+    kLogPriorityDebug = 0,
+    kLogPriorityInfo,
+    kLogPriorityWarn,
+    kLogPriorityError
+};
+
 enum XModProductCode
 {
     kProductDev = 1,            // 开发助手
@@ -65,6 +73,7 @@ enum XModMockMode
 /***************************
  * general
  ***************************/
+XMOD_API void xmod_log(XModLogPriority priority, const char* fmt, ...);
 XMOD_API void xmod_get_platform(char** platform);
 XMOD_API void xmod_get_version_code(int* code);
 XMOD_API void xmod_get_version_name(char** name);
@@ -98,6 +107,7 @@ XMOD_API bool xmod_xsp_extract_res(const char* subpath, const char* destpath);
 /***************************
  * image
  ***************************/
+XMOD_API const xmod_image* xmod_cached_image_from_screen();
 XMOD_API xmod_image* xmod_image_from_screen();
 XMOD_API xmod_image* xmod_image_from_screen_clip(const xmod_rect& rect);
 XMOD_API xmod_image* xmod_image_from_file(const char* path);

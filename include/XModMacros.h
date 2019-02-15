@@ -39,20 +39,6 @@
 #define XMOD_CALL_FUNC_AX(F, N)      XMOD_CONCAT(XMOD_CALL_FUNC_A, N)(F)
 #define XMOD_CALL_FUNC(func, ...)    XMOD_CALL_FUNC_AX(func, XMOD_GET_ARG_CNT(__VA_ARGS__))
 
-#if defined(_DEBUG) && !defined(NDEBUG)
-// debug
-#if defined(__ANDROID__)
-// debug-android
-#include <android/log.h>
-#define XMOD_LOG(msg, ...)           __android_log_print(ANDROID_LOG_INFO, "xmod_ext", msg, __VA_ARGS__)
-#elif defined(__APPLE__)
-// debug-ios
-#import  <Foundation/Foundation.h>
-#define XMOD_LOG(msg, ...)           NSLog([NSString stringWithFormat:@"[I]<xmod_ext>%@", [NSString stringWithFormat:[NSString stringWithUTF8String:msg], __VA_ARGS__]])
-#endif
-#else
-// non-debug / release
-#define XMOD_LOG(msg, ...)           do {} while(0)
-#endif
+#define XMOD_LOG(msg, ...)           xmod_log(XModLogPriority::kLogPriorityDebug, msg, ##__VA_ARGS__)
 
 #endif // __XMOD_MACROS_H__
