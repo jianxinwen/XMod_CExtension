@@ -118,6 +118,7 @@ XMOD_API bool xmod_image_get_size(const xmod_image* image, xmod_size* size);
 XMOD_API void xmod_image_get_format(const xmod_image* image, XModPixelFormat* format);
 XMOD_API bool xmod_image_get_rgb(const xmod_image* image, const xmod_point& point, xmod_color3b* c3b);
 XMOD_API bool xmod_image_get_pixel(const xmod_image* image, const xmod_point& point, uint32_t* pixel);
+XMOD_API bool xmod_image_get_pixels(const xmod_image* image, uint32_t** pixel);
 XMOD_API void xmod_image_set_rotation(xmod_image* image, XModRotation rotation);
 XMOD_API void xmod_image_clip_with_rect(xmod_image* image, const xmod_rect& rect);
 XMOD_API bool xmod_image_save_to_file(const xmod_image* image, const char* path, int quality);
