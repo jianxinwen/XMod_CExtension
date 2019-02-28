@@ -1,6 +1,6 @@
 #!/bin/bash
 # @Author  Irvin Pang @ XXTeam
-# @E-mail  halo.irvin@gmail.com
+# @Repo    https://github.com/xxzhushou
 
 # 配置各种目录路径
 DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
@@ -31,7 +31,10 @@ while getopts "fdrm:" opt; do
 done
 
 source $XMOD_ROOT/modules/$BUILD_MODULE/proj.android/build_config.sh
-[ $? -eq 0 ] || echo "[ERROR] module '"$BUILD_MODULE"' not found!"
+if [ ! $? -eq 0 ]; then
+	echo "[ERROR] module '"$BUILD_MODULE"' not found!"
+	exit 1
+fi
 
 if [ $BUILD_FLAG_DEBUG == 1 ]; then
 	echo "[WARN] building $BUILD_MODULE under DEBUG mode"
