@@ -12,7 +12,7 @@ echo using $xcode_version ...
 # 推荐先安装xcpretty, 优化xcodebuild的输出
 has_xcpretty=`which xcpretty`
 if [[ $has_xcpretty == '' ]]; then
-	echo "[WARN] recommanded to run 'brew install xcpretty' first"
+	echo "[WARN] recommanded to run 'gem install xcpretty' first"
 else
 	echo using xcpretty `xcpretty -v` ...
 fi
