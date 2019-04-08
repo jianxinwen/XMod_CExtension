@@ -2,7 +2,7 @@
 # @E-mail  halo.irvin@gmail.com
 
 APP_ABI := armeabi-v7a x86
-APP_STL := gnustl_static
+APP_STL := c++_static
 
 WARN_FLAGS := -Wno-format-security -Wno-array-bounds -Wno-string-plus-int -Wno-varargs
 C_FLAGS := -fsigned-char
